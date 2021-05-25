@@ -32,10 +32,16 @@ function myMiniProgram(){
 }
 
 */
-
+var currentPlayer = "X";
 
 function chooseBox(square){
-	square.innerText = "X"
+	square.innerText = currentPlayer;
+	if(currentPlayer == "X"){
+		currentPlayer = "O";
+	}
+	else{
+		currentPlayer = "X";
+	}
 }
 
 </script>
