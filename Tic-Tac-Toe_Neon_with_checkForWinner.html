@@ -1,0 +1,110 @@
+<html>
+<head>
+<title>Tic-Tac-Toe Complete</title>
+<style>
+
+body{
+	background-color: black;
+}
+
+.box {
+	width: 110px;
+	height: 100px;
+	border: 3px solid #9d18d5;
+	background-color: #1c1e1e;
+	float: left;
+	border-radius: 10%;
+	font-size: 60pt;
+	text-align: center;
+	padding-top: 10px;
+	color: #07eedd;
+	filter: drop-shadow(10px 10px 8px magenta);
+}
+
+.row {
+	clear: both;
+}
+
+</style>
+
+</head>
+<body>
+
+<script>
+
+var currentPlayer = "X";
+var gameOn = true;
+
+function myMiniProgram(){
+	//alert("Hello");
+	//document.write("Evan was here");
+	location.reload();
+}
+
+function checkForWinner(a,b,c){
+	var boxA = document.getElementById(a).innerText; 
+	var boxB = document.getElementById(b).innerText;
+	var boxC = document.getElementById(c).innerText;
+
+	if ((boxA != "") && (boxA == boxB) && (boxA == boxC)){
+		//If boxA is not empty, AND boxA is the same as box B AND box C...
+		//in that case...
+		alert("We have a winner!");
+		gameOn = false;
+		//Setting gameOn to false, means that all further clicks 
+		//on the gameboard will be ignored.  
+	}
+}
+
+function chooseBox(square){
+	if(square.innerText != "" || gameOn != true){
+		//If the box we clicked is not empty or gameOn is not set to true...
+		//ignore this click and end the chooseBox function.
+		return
+	}
+	square.innerText = currentPlayer;
+	if(currentPlayer == "X"){
+		currentPlayer = "O";
+	}
+	else{
+		currentPlayer = "X";
+	}
+
+	checkForWinner("1","2","3"); //Checks the top row for a winner
+	checkForWinner("4","5","6"); //Checks the middle row for a winner
+	checkForWinner("7","8","9"); //Checks the bottom row for a winner
+	checkForWinner("1","4","7"); //Checks the left column for a winner
+	checkForWinner("2","5","8"); //Checks the middle column for a winner
+	checkForWinner("3","6","9"); //Checks the right column for a winner
+	checkForWinner("1","5","9"); //Checks the back slash diagonal \
+	checkForWinner("3","5","7"); //Checks the forward slash diagonal /
+
+}
+
+</script>
+
+<div class="row">
+	<div id = "1" class="box" onclick=chooseBox(this)></div>
+	<div id = "2" class="box" onclick=chooseBox(this)></div>
+	<div id = "3" class="box" onclick=chooseBox(this)></div>
+</div>
+
+<div class="row">
+	<div id = "4" class="box" onclick=chooseBox(this)></div>
+	<div id = "5" class="box" onclick=chooseBox(this)></div>
+	<div id = "6" class="box" onclick=chooseBox(this)></div>
+</div>
+
+<div class="row">
+	<div id = "7" class="box" onclick=chooseBox(this)></div>
+	<div id = "8" class="box" onclick=chooseBox(this)></div>
+	<div id = "9" class="box" onclick=chooseBox(this)></div>
+</div>
+
+<div class="row">
+<br>
+<button onclick=myMiniProgram()>New Game</button>
+</div>
+
+</body>
+</html>
