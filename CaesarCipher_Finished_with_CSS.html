@@ -1,0 +1,102 @@
+
+<!DOCTYPE html>
+<html>
+	<head>
+		<title>Caesar's Cipher</title>
+		<link rel="preconnect" href="https://fonts.gstatic.com">
+		<link href="https://fonts.googleapis.com/css2?family=Sigmar+One&display=swap" rel="stylesheet">
+	<style>
+		*{
+			font-size: 130%;
+		}
+
+		body{
+			background-image: url("stone-background.jpg");
+		}
+
+		h1{
+			font-size: 170%;
+			color: orange;
+			filter: drop-shadow(4px 4px 2px black);
+
+		}
+
+		h1, button{
+			font-family: 'Sigmar One', cursive;
+			text-align: center;
+		}
+		.container{
+			display: flex;
+			flex-direction: column;
+		}
+
+		input{
+			text-align: center;
+			font-weight: bolder;
+		}
+		#textInput{
+			background-color: cyan;
+			color: black;
+		}
+
+		#keyInput{
+			background-color: orange;
+		}
+
+		#result{
+			background-color: black;
+			color: cyan;
+			border: grey 5px solid;
+			border-radius: 10px;
+		}
+	</style>
+	</head>
+	<body>
+		<script type="text/javascript">
+
+		var SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz ,.!?"
+
+		function transform(mode){
+			var originalText = document.getElementById("textInput").value;
+			var key = parseInt(document.getElementById("keyInput").value);
+			    key = key * mode
+			var newMessage = "";
+			var oldIndex;
+			var newIndex;
+			var output = document.getElementById("result");
+			for (var x = 0; x < originalText.length; x++){
+				var c = originalText[x]; //this is a single character at location x.
+
+				oldIndex = parseInt(SYMBOLS.indexOf(c));//Find that letter's location in the SYMBOLS alphabet.
+				if (oldIndex == -1){
+					newMessage += c // if the symbol isn't listed in our SYMBOLS, just add it the way it is.
+					continue
+				}
+				console.log(oldIndex);
+				newIndex = oldIndex + key; //adds some number to the previous location.
+				console.log(newIndex);
+				newIndex = newIndex % SYMBOLS.length;
+				while (newIndex <0){
+					newIndex = newIndex + SYMBOLS.length;
+				}
+				console.log(`post modulo the new index is ${newIndex}`);
+				newMessage += SYMBOLS[newIndex]; // Add the new letter to the new message
+			}
+			console.log(newMessage);
+			output.innerText = newMessage;
+		} 
+
+		</script>
+		<div class="container">
+		<h1>Caesar Cipher</h1>
+		<input type="text" id="textInput" onfocus="this.value=''" value="Type your message here" >
+		<br>
+		<br>
+		<input type="text" id="keyInput" onfocus="this.value=''" value="Enter the key" >
+		<br><br>
+		<button onclick = "transform(1)">Encrypt</button>
+		<button onclick = "transform(-1)">Decrypt</button>
+		<h3 id="result"></h3>
+		</div>
+	</body>
+</html>
