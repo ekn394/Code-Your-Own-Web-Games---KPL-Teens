@@ -13,6 +13,7 @@ function transform(mode){
 	var newMessage = "";
 	var key = parseInt(document.getElementById("keyInput").value);
 	key = key * mode;
+	var output = document.getElementById("result")
 
 	//var c; //the character (letter) you are currently working on, (We change them one at a time)
 	var startingIndex;
@@ -38,10 +39,9 @@ function transform(mode){
 	}
 
 	console.log(newMessage);
+	output.innerText = newMessage;
 }	
-
 </script>
-
 
 
 
@@ -55,5 +55,6 @@ function transform(mode){
 <br>
 <button onclick=transform(1)>Encrypt</button>
 <button onclick=transform(-1)>Decrypt</button>
+<div id=result></div>
 </body>
 </html>
