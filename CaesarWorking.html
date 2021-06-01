@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<title></title>
+
+
+<script>
+	
+var SYMBOLS = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz "
+
+function transform(mode){
+	var message = document.getElementById("textInput").value;
+	var newMessage = "";
+	var key = parseInt(document.getElementById("keyInput").value);
+	key = key * mode;
+
+	//var c; //the character (letter) you are currently working on, (We change them one at a time)
+	var startingIndex;
+	var newIndex;
+
+	for (i in message){
+		//console.log(message[index]); //prints the letter 
+		console.log(SYMBOLS.indexOf(message[i])); //prints the letter's location in the SYMBOLS alphabet.
+		startingIndex = (SYMBOLS.indexOf(message[i])); 
+		//console.log(startingIndex);
+		newIndex = startingIndex + key;
+		while (newIndex > SYMBOLS.length-1){
+			newIndex = newIndex - SYMBOLS.length;
+		}
+		while (newIndex < 0){
+			newIndex = newIndex + SYMBOLS.length;
+		}
+		//console.log("The new letter will be at position");
+		//console.log(newIndex);
+		console.log(SYMBOLS[newIndex]);//print the new letter
+		newLetter = (SYMBOLS[newIndex]);
+		newMessage += newLetter;
+	}
+
+	console.log(newMessage);
+}	
+
+</script>
+
+
+
+
+</head>
+<body>
+
+<h1>Caesars Cipher</h1>
+<input id=textInput onfocus="this.value=''" value="Type the message here">
+<br>
+<input id=keyInput onfocus="this.value=''" value="Type in the encryption key">
+<br>
+<button onclick=transform(1)>Encrypt</button>
+<button onclick=transform(-1)>Decrypt</button>
+</body>
+</html>
